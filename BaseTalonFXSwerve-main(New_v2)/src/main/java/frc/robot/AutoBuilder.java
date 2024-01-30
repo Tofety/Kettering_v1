@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class AutoBuilder {
 
-    public static SendableChooser<Command> buildAutoChooser(String string) {
+
+    public static SendableChooser<Command> autoChooser() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'buildAutoChooser'");
     }

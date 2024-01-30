@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
 
@@ -63,29 +64,25 @@ public class RobotContainer {
             )
         );
 
-        // Configure the button bindings
-        configureButtonBindings();
 
 
 
         // Register Named Commands
-        //NamedCommands.registerCommand("autoBalance", s_Swerve.autoBalanceCommand());
-        //NamedCommands.registerCommand("exampleCommand", exampleSubsystem.exampleCommand());
-
-
-        // Do all other initialization
-        //configureButtonBindings();
-
-        // ...
+        NamedCommands.registerCommand("Intake", Swerve.Intake());
 
         //autoChooser
         
-         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
+        autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()'
+
          //PathPlannerPath path = PathPlannerPath.fromPathFile("exampleAutoPath");
+         //PathPlannerPath testPath = PathPlannerPath.fromPathFile("testAuto");
+         //PathPlannerAuto testAuto = (PathPlannerAuto) PathPlannerAuto.getPathGroupFromAutoFile("testAuto");
          //autoChooser.addOption("Example", AutoBuilder.followPath(path));
+         //autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
+        // autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
+        //autoChooser = AutoBuilder.buildAuto(testAuto);
          SmartDashboard.putData("Auto Mode", autoChooser);
 
-         NamedCommands.registerCommand("Intake", Swerve.Intake());
 
          configureButtonBindings();
         
@@ -109,6 +106,8 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
+
+        //return new PathPlannerAuto("testAuto");
         return autoChooser.getSelected();
         //Object m_autoSelected;
         //return new AutoDrive(s_Swerve);
