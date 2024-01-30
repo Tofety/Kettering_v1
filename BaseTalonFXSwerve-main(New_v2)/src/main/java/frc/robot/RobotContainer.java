@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -65,8 +66,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
 
-        //Auto Path Planner Set Up
-        ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+
 
         // Register Named Commands
         //NamedCommands.registerCommand("autoBalance", s_Swerve.autoBalanceCommand());
@@ -81,9 +81,13 @@ public class RobotContainer {
         //autoChooser
         
          autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
-         PathPlannerPath path = PathPlannerPath.fromPathFile("exampleAutoPath");
-         autoChooser.addOption("Example", AutoBuilder.followPathWithEvent(path));
+         //PathPlannerPath path = PathPlannerPath.fromPathFile("exampleAutoPath");
+         //autoChooser.addOption("Example", AutoBuilder.followPath(path));
          SmartDashboard.putData("Auto Mode", autoChooser);
+
+         NamedCommands.registerCommand("Intake", Swerve.Intake());
+
+         configureButtonBindings();
         
     }
 
