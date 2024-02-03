@@ -4,8 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,10 +22,10 @@ import frc.robot.subsystems.Swerve;
  * project.
  */
 public class Robot extends TimedRobot {
+
+  PowerDistribution PD = new PowerDistribution(1, ModuleType.kRev);
+
   public static final CTREConfigs ctreConfigs = new CTREConfigs();
-
-
-  public static SendableChooser sendableChooser;
 
   private Command m_autonomousCommand;
 
@@ -38,14 +39,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    sendableChooser = new SendableChooser();
     //sendableChooser.setDefaultOption("DoNothing", );
     //sendableChooser.addOption("example", new exampleAuto()));
     // sendableChooser.addOption("Drive and Shoot", new AutoDriveAndShoot());
     // sendableChooser.addOption("Drive", new AutoDrive(s_Swerve));
-    SmartDashboard.putData("Auton", sendableChooser);
+    SmartDashboard.putNumber("Voltage", PD.getVoltage());
 
     m_robotContainer = new RobotContainer();
+
     
   }
 
