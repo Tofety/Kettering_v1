@@ -53,6 +53,7 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
 
+
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
         s_Swerve.setDefaultCommand(
@@ -83,7 +84,8 @@ public class RobotContainer {
          //autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
         //autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
         //autoChooser = AutoBuilder.buildAuto(testAuto);
-         SmartDashboard.putData("Auto Mode", autoChooser);
+         Shuffleboard.getTab("Auto Mode").add(autoChooser);
+         //SmartDashboard.putData("Auto Mode", autoChooser);
          //Shuffleboard.putData("Shuffle Auto Mode", AutoBuilder.buildAutoChooser());
 
 
