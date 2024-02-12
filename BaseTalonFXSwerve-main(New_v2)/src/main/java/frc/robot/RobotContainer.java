@@ -5,6 +5,8 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
 
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -14,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -34,8 +36,12 @@ public class RobotContainer {
     // sendableChooser.addOption("Drive", new AutoDrive(s_Swerve));
     // private final SmartDashboard.putData("Auto", sendableChooser);
 
+
     /* Controllers */
     private final Joystick driver = new Joystick(0);
+    private final Joystick operator = new Joystick(1);
+    Trigger intakeStartButton = new JoystickButton(operator, 1);
+    Trigger intakeButton = new JoystickButton(operator, 2);
 
     /* Drive Controls */
     private final int translationAxis = 1;
@@ -48,7 +54,8 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-
+    public final Intake s_Intake = new Intake();
+    private final Shooter s_Shooter = new Shooter();
     //auton
     private final SendableChooser<Command> autoChooser;
 
@@ -66,11 +73,14 @@ public class RobotContainer {
             )
         );
 
-
+        intakeStartButton.onTrue(s_Intake.runIntakeCommand());
+        intakeStartButton.onFalse(s_Intake.stopIntakeCommand());
+        intakeButton.onTrue(s_Intake.autoIntake());
 
 
         // Register Named Commands
-        NamedCommands.registerCommand("Intake", Swerve.Intake());
+        NamedCommands.registerCommand("Intake", s_Intake.runIntakeCommand());
+        NamedCommands.registerCommand("Shooter", s_Shooter.runShooterCommand());
 
         //autoChooser
         
@@ -84,8 +94,9 @@ public class RobotContainer {
          //autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
         //autoChooser.addOption("testPath", Swerve.followPathCommand(String testPath));
         //autoChooser = AutoBuilder.buildAuto(testAuto);
-         Shuffleboard.getTab("Auto Mode").add(autoChooser);
-         //SmartDashboard.putData("Auto Mode", autoChooser);
+         //Shuffleboard.getTab("Auto Mode").add(autoChooser);
+         SmartDashboard.putData("Auto Mode", autoChooser);
+        //  SmartDashboard.putNumber("Sensor", input.getValue());
          //Shuffleboard.putData("Shuffle Auto Mode", AutoBuilder.buildAutoChooser());
 
 
