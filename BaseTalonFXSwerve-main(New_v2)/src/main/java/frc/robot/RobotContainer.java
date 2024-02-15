@@ -40,8 +40,13 @@ public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
     private final Joystick operator = new Joystick(1);
-    Trigger intakeStartButton = new JoystickButton(operator, 1);
-    Trigger intakeButton = new JoystickButton(operator, 2);
+    Trigger manualIntakeButton = new JoystickButton(operator, 1); // A
+    Trigger intakeButton = new JoystickButton(operator, 5);
+    Trigger shooterButton = new JoystickButton(operator, 6);
+    Trigger manualShooterTriggerButton = new JoystickButton(operator, 4); // y
+    Trigger manualShooterWheelsButton = new JoystickButton(operator, 3); // x
+    Trigger Fire = new JoystickButton(driver, 2); 
+    Trigger IntakeTrigger = new JoystickButton(driver, 1);
 
     /* Drive Controls */
     private final int translationAxis = 1;
@@ -56,6 +61,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
     public final Intake s_Intake = new Intake();
     private final Shooter s_Shooter = new Shooter();
+    private final Lift s_Lift = new Lift();
     //auton
     private final SendableChooser<Command> autoChooser;
 
@@ -66,21 +72,30 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(translationAxis)/2, 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
         );
 
-        intakeStartButton.onTrue(s_Intake.runIntakeCommand());
-        intakeStartButton.onFalse(s_Intake.stopIntakeCommand());
-        intakeButton.onTrue(s_Intake.autoIntake());
+        manualIntakeButton.onTrue(s_Intake.runIntakeCommand());
+        manualIntakeButton.onFalse(s_Intake.stopIntakeCommand());
+        IntakeTrigger.onTrue(s_Intake.autoIntake());
+        //intakeButton.onTrue(s_Intake.autoIntake());
+        Fire.onTrue(s_Shooter.AutoShooterCommand());
+        Fire.onFalse(s_Shooter.stopShooterCommand());
+        //shooterButton.onTrue(s_Shooter.AutoShooterCommand());
+        //shooterButton.onFalse(s_Shooter.stopShooterCommand());
+        manualShooterTriggerButton.onTrue(s_Shooter.runShooterTriggerCommand());
+        manualShooterTriggerButton.onFalse(s_Shooter.stopShooterTriggerCommand());
+        //manualShooterWheelsButton.onTrue(s_Shooter.runShooterCommand());
+        //manualShooterWheelsButton.onFalse(s_Shooter.stopShooterCommand());
 
 
         // Register Named Commands
         NamedCommands.registerCommand("Intake", s_Intake.runIntakeCommand());
-        NamedCommands.registerCommand("Shooter", s_Shooter.runShooterCommand());
+        NamedCommands.registerCommand("Shooter", s_Shooter.AutoShooterCommand());
 
         //autoChooser
         

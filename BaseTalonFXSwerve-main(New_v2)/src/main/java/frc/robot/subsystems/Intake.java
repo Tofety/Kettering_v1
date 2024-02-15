@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,8 +18,9 @@ public class Intake extends SubsystemBase {
     // intake motor declaration
     private static TalonSRX TIntake;
     private static TalonSRX BIntake;
-    private final AnalogInput NoteInput; 
+    //private final AnalogInput NoteInput; 
     private BooleanSupplier NoteValue;
+    public final DigitalInput NoteInput;
     
     //Photosensor
     
@@ -26,8 +28,9 @@ public class Intake extends SubsystemBase {
     public Intake() {
         TIntake = new TalonSRX(12);
         BIntake = new TalonSRX(10);
-        NoteInput = new AnalogInput(0);
-        NoteValue = () -> NoteInput.getValue() >= 1000;
+        //NoteInput = new AnalogInput(0);
+        NoteInput = new DigitalInput(1);
+        NoteValue = () -> NoteInput.get()==false;
     }
 
     // private boolean isNoteThere () {
@@ -38,8 +41,12 @@ public class Intake extends SubsystemBase {
     // control functions
     // run intake
 
-    public int SensorValue(){
-        return NoteInput.getValue();
+    public boolean SensorValue(){
+        return NoteInput.get();
+    }
+
+    public boolean NewSensorValue(){
+        return NoteInput.get();
     }
 
     private void runIntake() {
@@ -66,7 +73,8 @@ public class Intake extends SubsystemBase {
 
     @Override
     public void periodic(){
-        SmartDashboard.putNumber("Sensor", SensorValue());
+        SmartDashboard.putBoolean("Sensor", SensorValue());
+        SmartDashboard.putBoolean("New Sensor", NewSensorValue());
     }
     // stop intake
     // reverse intake

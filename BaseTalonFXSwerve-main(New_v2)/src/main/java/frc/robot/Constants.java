@@ -89,10 +89,10 @@ public final class Constants {
         public static final NeutralModeValue driveNeutralMode = NeutralModeValue.Brake;
 
 
-        static double BRoffset = (-59-180); //
-        static double BLoffset = 54; // don't touch for now
-        static double FRoffset = (-105-180);
-        static double FLoffset = 121; //old 121
+        static double BRoffset = 121.20; //old -239
+        static double BLoffset = 55.55; //old 54
+        static double FRoffset = 70.04; //old -285
+        static double FLoffset = (-59.94-180); //old 121
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
