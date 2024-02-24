@@ -16,21 +16,27 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "Shooter"
+                }
+              },
+              {
                 "type": "path",
                 "data": {
                   "pathName": "Center_Path_1"
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "Intake"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "Center_Path_2"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shooter"
                 }
               }
             ]

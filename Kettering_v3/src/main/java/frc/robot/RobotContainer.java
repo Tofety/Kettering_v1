@@ -5,6 +5,7 @@ import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.PathPlannerPath;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -41,12 +42,19 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
     private final Joystick operator = new Joystick(1);
     Trigger manualIntakeButton = new JoystickButton(operator, 1); // A
-    Trigger intakeButton = new JoystickButton(operator, 5);
-    Trigger shooterButton = new JoystickButton(operator, 6);
+    Trigger ampShooterTrigger = new JoystickButton(operator, 2); // B
+    //Trigger intakeButton = new JoystickButton(operator, 5);
+    //Trigger shooterButton = new JoystickButton(operator, 6);
     Trigger manualShooterTriggerButton = new JoystickButton(operator, 4); // y
-    Trigger manualShooterWheelsButton = new JoystickButton(operator, 3); // x
+    Trigger manualShooterWheelsButtonIn = new JoystickButton(operator, 3); // x
+    Trigger climbUpButton = new JoystickButton(operator, 6); // Right Bumper
+    Trigger climbDownButton = new JoystickButton(operator, 5); // Left Bumper
     Trigger Fire = new JoystickButton(driver, 2); 
     Trigger IntakeTrigger = new JoystickButton(driver, 1);
+    Trigger IntakeOutTrigger = new JoystickButton(driver, 6);
+    Trigger LiftUpButton = new JoystickButton(driver, 7);
+    Trigger LiftDownButton = new JoystickButton(driver, 30);
+
 
     /* Drive Controls */
     private final int translationAxis = 1;
@@ -54,12 +62,13 @@ public class RobotContainer {
     private final int rotationAxis = 5;
 
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, 2);
+    private final JoystickButton zeroGyro = new JoystickButton(driver, 10);
     private final JoystickButton robotCentric = new JoystickButton(driver, 8);
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     public final Intake_Shooter s_Intake_Shooter = new Intake_Shooter();
+    private final Climb s_Climb = new Climb();
     //private final Shooter s_Shooter = new Shooter();
     private final Lift s_Lift = new Lift();
     //auton
@@ -72,31 +81,48 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis)/2, 
+                () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
         );
 
+        CameraServer.startAutomaticCapture(0);
+
         manualIntakeButton.onTrue(s_Intake_Shooter.runIntakeCommand());
         manualIntakeButton.onFalse(s_Intake_Shooter.stopIntakeCommand());
         IntakeTrigger.onTrue(s_Intake_Shooter.autoIntake());
+        ampShooterTrigger.onTrue(s_Intake_Shooter.runAmpShooterCommand());
+        ampShooterTrigger.onFalse(s_Intake_Shooter.stopShooterCommand());
         //intakeButton.onTrue(s_Intake.autoIntake());
-        Fire.onTrue(s_Intake_Shooter.AutoShooterCommand());
+        Fire.onTrue(s_Intake_Shooter.AutoShooterCommand2());
+        Fire.onFalse(s_Intake_Shooter.stopShooterCommand());
         //Fire.onFalse(s_Intake_Shooter.stopShooterCommand());
         //shooterButton.onTrue(s_Shooter.AutoShooterCommand());
         //shooterButton.onFalse(s_Shooter.stopShooterCommand());
         manualShooterTriggerButton.onTrue(s_Intake_Shooter.runShooterTriggerCommand());
         manualShooterTriggerButton.onFalse(s_Intake_Shooter.stopShooterTriggerCommand());
+        climbUpButton.onTrue(s_Climb.ClimbUpCommand());
+        climbUpButton.onFalse(s_Climb.stopClimbCommand());
+        climbDownButton.onTrue(s_Climb.ClimbDownCommand());
+        climbDownButton.onFalse(s_Climb.stopClimbCommand());
+        IntakeOutTrigger.onTrue(s_Intake_Shooter.runIntakeOutCommand());
+        IntakeOutTrigger.onFalse(s_Intake_Shooter.stopIntakeCommand());
+        manualShooterWheelsButtonIn.onTrue(s_Intake_Shooter.runShooterInCOmmand());
+        manualShooterWheelsButtonIn.onFalse(s_Intake_Shooter.stopShooterCommand());
+
+        LiftUpButton.onTrue(s_Lift.LiftUpCommand());
+        LiftDownButton.onTrue(s_Lift.LiftDownCommand());
+
         //manualShooterWheelsButton.onTrue(s_Shooter.runShooterCommand());
         //manualShooterWheelsButton.onFalse(s_Shooter.stopShooterCommand());
 
 
         // Register Named Commands
         NamedCommands.registerCommand("Intake", s_Intake_Shooter.runIntakeCommand());
-        NamedCommands.registerCommand("Shooter", s_Intake_Shooter.AutoShooterCommand());
-
+        NamedCommands.registerCommand("Shooter", s_Intake_Shooter.AutoShooterCommand2());
+        NamedCommands.registerCommand("StopShooter", s_Intake_Shooter.stopShooterCommand());
         //autoChooser
         
         autoChooser = AutoBuilder.buildAutoChooser(); // Default auto will be `Commands.none()'

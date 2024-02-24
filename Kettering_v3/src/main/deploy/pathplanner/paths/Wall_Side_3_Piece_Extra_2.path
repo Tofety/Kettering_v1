@@ -3,59 +3,48 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.9,
-        "y": 7.0
+        "x": 8.0,
+        "y": 5.78
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0180339887498984,
-        "y": 7.0
+        "x": 7.953642723803185,
+        "y": 5.78
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.9,
-        "y": 7.0
+        "x": 5.57,
+        "y": 6.51
       },
       "prevControl": {
-        "x": 1.485786437626906,
-        "y": 7.0
+        "x": 7.363815362211055,
+        "y": 6.202385880857811
       },
       "nextControl": {
-        "x": 4.314213562373101,
-        "y": 7.0
+        "x": 3.776184637788946,
+        "y": 6.817614119142188
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.9,
-        "y": 7.0
+        "x": 0.59,
+        "y": 6.79
       },
       "prevControl": {
-        "x": -0.6206906325745548,
-        "y": 7.0
+        "x": 0.7968303671566173,
+        "y": 6.79
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [
-    {
-      "waypointRelativePos": 0.8,
-      "rotationDegrees": 180.0,
-      "rotateFast": false
-    },
-    {
-      "waypointRelativePos": 1.15,
-      "rotationDegrees": 180.0,
-      "rotateFast": false
-    }
-  ],
+  "rotationTargets": [],
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
@@ -66,13 +55,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -115.0,
-    "rotateFast": false
+    "rotation": 60.0,
+    "rotateFast": true
   },
   "reversed": false,
-  "folder": "Wall Side",
+  "folder": "Wall_Side_3_Piece",
   "previewStartingState": {
-    "rotation": -120.0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

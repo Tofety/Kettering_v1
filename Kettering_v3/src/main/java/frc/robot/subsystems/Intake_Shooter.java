@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.SwerveModule;
 
@@ -47,7 +48,7 @@ public class Intake_Shooter extends SubsystemBase {
         //DigitalInput NoteInputShooter = s_Intake.NoteInput; 
 
         ShooterTrigger.setInverted(true);
-        ShooterRPM = () -> ShooterMotorLeft.getEncoder().getVelocity() >= 4500;
+        ShooterRPM = () -> ShooterMotorLeft.getEncoder().getVelocity() >= 4150;
 
         // NoteInput = new DigitalInput(1);
         NoteValueShooter = () -> NoteInput.get()==true;
@@ -70,17 +71,28 @@ public class Intake_Shooter extends SubsystemBase {
     }
 
     private void runIntake() {
-        TIntake.set(ControlMode.PercentOutput, 0.5);
-        BIntake.set(ControlMode.PercentOutput, 0.5);
+        TIntake.set(ControlMode.PercentOutput, 0.75);
+        BIntake.set(ControlMode.PercentOutput, 0.75);
     }
 
     private void stopIntake(){
         TIntake.set(ControlMode.PercentOutput, 0);
         BIntake.set(ControlMode.PercentOutput, 0); 
+        ShooterTrigger.set(0);
+    }
+
+    private void runIntakeOut(){
+        TIntake.set(ControlMode.PercentOutput, -1);
+        BIntake.set(ControlMode.PercentOutput, -1);
+        ShooterTrigger.set(-1);
     }
 
     public Command runIntakeCommand(){
        return this.runOnce(this::runIntake);   
+    }
+
+    public Command runIntakeOutCommand(){
+        return this.runOnce(this::runIntakeOut);
     }
 
     public Command stopIntakeCommand(){
@@ -93,14 +105,14 @@ public class Intake_Shooter extends SubsystemBase {
 
     @Override
     public void periodic(){
-        SmartDashboard.putBoolean("Sensor", SensorValue());
+        SmartDashboard.putBoolean("NOTE IN/OUT (red - IN, green - OUT)", SensorValue());
         SmartDashboard.putBoolean("New Sensor", NewSensorValue());
         SmartDashboard.putNumber("NEO RPM", ShooterMotorLeft.getEncoder().getVelocity());
     }
 
     private void runShooter(){
-        ShooterMotorLeft.set(1);
-        ShooterMotorRight.set(1);
+        ShooterMotorLeft.set(0.85);
+        ShooterMotorRight.set(0.85);
     }
 
     private void stopShooter(){
@@ -117,6 +129,20 @@ public class Intake_Shooter extends SubsystemBase {
         ShooterTrigger.set(0);
     }
 
+    public void runAmpShooter(){
+        ShooterMotorLeft.set(0.5);
+        ShooterMotorRight.set(0.5);
+        ShooterTrigger.set(1);
+    }
+
+    public void runShooterIn(){
+        ShooterMotorLeft.set(-0.8);
+        ShooterMotorRight.set(-0.8);
+    }
+
+    public Command runAmpShooterCommand(){
+        return this.runOnce(this::runAmpShooter);
+    }
 
     public Command runShooterCommand(){
         return this.runOnce(this::runShooter);
@@ -134,14 +160,27 @@ public class Intake_Shooter extends SubsystemBase {
         return this.runOnce(this::stopShooterTrigger);
     }
 
-    // public Command startAutoShooterCommand(){
-    //     //return this.startEnd(this::runShooter, this::runShooterTrigger).until(ShooterRPM);
-    //     retunr this.
-    // }
-
+    
     public Command AutoShooterCommand(){
         return this.startEnd(this::runShooter, this::runShooterTrigger).until(ShooterRPM);
     }
+
+    public Command runShooterInCOmmand(){
+        return this.runOnce(this::runShooterIn);
+    }
+
+    // public Command NewAutoShooterCommand(){
+    //     //return this.startEnd(this::runShooter, this::runShooterTrigger).until(ShooterRPM);
+    //     return this.runOnce(this::AutoShooterCommand).until(NoteValueShooter);
+    // }
+
+    public Command AutoShooterCommand2() {
+        // return AutoShooterCommand().andThen(Commands.waitSeconds(1)).andThen(stopShooterCommand());
+        // return this.startEnd(this::AutoShooterCommand, this::stopShooterCommand).until(NoteValueShooter);
+        return AutoShooterCommand().andThen(Commands.waitSeconds(2)).andThen(stopShooterCommand());
+    }
+
+
     // stop intake
     // reverse intake
 

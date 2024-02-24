@@ -2,15 +2,21 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8,
-      "y": 4.3
+      "x": 0.5740411480822968,
+      "y": 4.353858993432273
     },
-    "rotation": 120.0
+    "rotation": -60.0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter"
+          }
+        },
         {
           "type": "path",
           "data": {
@@ -21,6 +27,12 @@
           "type": "path",
           "data": {
             "pathName": "OuterSide_Path_2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter"
           }
         }
       ]

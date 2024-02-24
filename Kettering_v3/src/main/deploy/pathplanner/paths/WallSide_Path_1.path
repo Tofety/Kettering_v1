@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 0.9,
-        "y": 7.0
+        "x": 0.5887006059726411,
+        "y": 6.787329003229436
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0180339887498984,
-        "y": 7.0
+        "x": 0.6350578821694564,
+        "y": 6.787329003229436
       },
       "isLocked": false,
       "linkedName": null
@@ -20,7 +20,7 @@
         "y": 7.0
       },
       "prevControl": {
-        "x": 1.485786437626906,
+        "x": 2.6931696328433827,
         "y": 7.0
       },
       "nextControl": null,
@@ -30,22 +30,40 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.5,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "Intake"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
-    "maxVelocity": 2.0,
-    "maxAcceleration": 1.5,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0,
+    "rotation": 0.0,
     "rotateFast": true
   },
   "reversed": false,
   "folder": "Wall Side",
   "previewStartingState": {
-    "rotation": -120.0,
+    "rotation": 60.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

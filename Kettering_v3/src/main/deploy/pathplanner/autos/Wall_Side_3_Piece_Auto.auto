@@ -20,19 +20,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WallSide_Path_1"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
+            "pathName": "Wall_Side_3_Piece_1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Copy of WallSide_Path_1"
+            "pathName": "Wall_Side_3_Piece_2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Wall_Side_3_Piece_3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Wall_Side_3_Piece_4"
           }
         },
         {

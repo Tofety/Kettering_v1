@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 1.3367291599448063,
-      "y": 5.55
+      "y": 5.5
     },
     "rotation": 0
   },
@@ -20,13 +20,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_1"
+            "pathName": "Center_Path_3_Piece_1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_2"
+            "pathName": "Center_Path_3_Piece_2"
           }
         },
         {
@@ -38,13 +38,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_3"
+            "pathName": "Center_Path_3_Piece_3"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_4"
+            "pathName": "Center_Path_3_Piece_4"
           }
         },
         {
@@ -56,13 +56,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_5"
+            "pathName": "Center_Path_3_Piece_Extra_1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Four_Piece_6"
+            "pathName": "Center_Path_3_Piece_Extra_2"
           }
         },
         {

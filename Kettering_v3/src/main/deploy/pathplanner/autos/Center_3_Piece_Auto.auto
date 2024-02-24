@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.5887006059726411,
-      "y": 6.787329003229436
+      "x": 1.3367291599448063,
+      "y": 5.5
     },
-    "rotation": 60.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -20,19 +20,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "WallSide_Path_1"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.0
+            "pathName": "Center_Path_3_Piece_1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Copy of WallSide_Path_1"
+            "pathName": "Center_Path_3_Piece_2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shooter"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Center_Path_3_Piece_3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Center_Path_3_Piece_4"
           }
         },
         {

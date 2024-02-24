@@ -5,13 +5,16 @@
   "pathFolders": [
     "Center",
     "Four_Piece",
+    "Center_3_Piece",
     "OuterSide",
-    "Wall Side"
+    "Outer_Side_3_Piece",
+    "Wall Side",
+    "Wall_Side_3_Piece"
   ],
   "autoFolders": [],
-  "defaultMaxVel": 2.0,
-  "defaultMaxAccel": 1.5,
+  "defaultMaxVel": 4.0,
+  "defaultMaxAccel": 4.0,
   "defaultMaxAngVel": 540.0,
   "defaultMaxAngAccel": 720.0,
-  "maxModuleSpeed": 2.0
+  "maxModuleSpeed": 4.0
 }
